@@ -29,7 +29,13 @@ Da, i morate ga namjestiti u postavkama dodatka
 ### Plugin odbija prihvatiti moj certifikat i lozinku
 
 Ako koristite noviju verziju PHPa (v8) i OpenSSLa (v3) i imate stariji certifikat, onda je moguće da plugin neće prihvatiti vaš certifikat.
-Namjestite ove postavke u /etc/ssl/openssl.cnf
+Pretvorite certifikate u noviju verziju uz pomoć ovih naredbi:
+```
+openssl pkcs12 -legacy -in key.p12 -nodes -out key_decrypted.tmp
+
+openssl pkcs12 -in key_decrypted.tmp -export -out key_new.p12
+```
+ili namjestite ove postavke u /etc/ssl/openssl.cnf
 
 ```
 [openssl_init]
